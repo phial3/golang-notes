@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import "pb/any.proto";
+
+package hello;
+option go_package="github.com/phial3/golang-notes/rpc/pb";
+
+message ErrorStatusExt {
+   ErrorStatus error_status = 1;
+}
+
+// protoc -I=/usr/local/include -I=. --go_out=./pb --go_opt=module="github.com/phial3/golang-notes/rpc/pb" pb/import.proto

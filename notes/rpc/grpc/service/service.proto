@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package hello;
+option go_package="github.com/phial3/golang-notes/rpc/grpc/service";
+
+// The HelloService service definition.
+service HelloService {
+    rpc Hello (Request) returns (Response) {}
+
+    rpc Channel (stream Request) returns (stream Response) {}
+}
+
+message Request {
+    string value = 1;
+}
+
+message Response {
+    string value = 1;
+}
+
+// protoc -I=. --go_out=./grpc --go_opt=module="github.com/phial3/golang-notes/rpc/grpc" --go-grpc_out=./grpc --go-grpc_opt=module="github.com/phial3/golang-notes/rpc/grpc" grpc/service/service.proto

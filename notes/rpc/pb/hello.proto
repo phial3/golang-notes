@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package hello;
+option go_package="github.com/phial3/golang-notes/rpc/pb";
+
+service HelloService {
+    rpc Hello (String) returns (String);
+}
+
+message String {
+    string value = 1;
+}
+
+// protoc -I=. --go_out=./pb --go_opt=module="github.com/phial3/golang-notes/rpc/pb" pb/hello.proto
+
+// protoc -I=. --go_out=./pb --go_opt=module="github.com/phial3/golang-notes/rpc/pb" --go-grpc_out=./pb --go-grpc_opt=module="github.com/phial3/golang-notes/week21/pb" pb/hello.proto
