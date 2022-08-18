@@ -8,4 +8,6 @@ use (
 	./toolkit
 	./notes
 	./goutils
+	./goutil
+	./genesis
 )
