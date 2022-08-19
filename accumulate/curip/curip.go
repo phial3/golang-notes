@@ -3,7 +3,7 @@ package curip
 import (
 	"bytes"
 	"fmt"
-	"github.com/phial3/goutils/httplib"
+	"github.com/phial3/accumulate/httplib"
 	"log"
 	"net"
 	"os/exec"

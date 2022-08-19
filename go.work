@@ -7,7 +7,7 @@ use (
 	./helper
 	./toolkit
 	./notes
-	./goutils
+	./accumulate
 	./goutil
 	./genesis
 )

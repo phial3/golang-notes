@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/phial3/goutils/choke"
-	"github.com/phial3/goutils/tcp/socks5"
+	"github.com/phial3/accumulate/choke"
+	"github.com/phial3/accumulate/tcp/socks5"
 )
 
 /**

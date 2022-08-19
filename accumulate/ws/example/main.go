@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/phial3/goutils/ws/server"
+	"github.com/phial3/accumulate/ws/server"
 	"net/http"
 )
 

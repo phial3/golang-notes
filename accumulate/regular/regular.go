@@ -2,7 +2,7 @@ package regular
 
 import (
 	"fmt"
-	"github.com/phial3/goutils/httplib"
+	"github.com/phial3/accumulate/httplib"
 	"regexp"
 	"strings"
 )

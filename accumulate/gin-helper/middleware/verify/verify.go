@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"github.com/phial3/goutils/gin-helper"
+	"github.com/phial3/accumulate/gin-helper"
 	"io/ioutil"
 	"net/url"
 	"strings"

@@ -2,7 +2,7 @@ package area
 
 import (
 	"encoding/json"
-	"github.com/phial3/goutils/file"
+	"github.com/phial3/accumulate/file"
 	"strings"
 )
 

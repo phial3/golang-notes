@@ -1,4 +1,4 @@
-module github.com/phial3/goutils
+module github.com/phial3/accumulate
 
 go 1.18
 

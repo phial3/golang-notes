@@ -1,7 +1,7 @@
 package curip
 
 import (
-	"github.com/phial3/goutils/regular"
+	"github.com/phial3/accumulate/regular"
 	. "github.com/smartystreets/goconvey/convey"
 	"testing"
 )
