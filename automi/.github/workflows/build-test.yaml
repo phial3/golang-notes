@@ -1,0 +1,39 @@
+
+name: Go
+on: [push, pull_request]
+env:
+  SRC_PATHS: ./api ./collectors/ ./emitters ./operators ./stream ./testutil ./util
+  SRC_PATHS_PATTERN: ./api/... ./collectors/... ./emitters/... ./operators/... ./stream/... ./testutil/... ./util/...
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go 1.16
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16.x
+        id: go
+
+      - name: Code checkout
+        uses: actions/checkout@v2
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          skip-go-installation: true
+          args: ./api ./collectors/ ./emitters ./operators/... ./stream ./testutil ./util
+
+      - name: Code sanity
+        run: |
+          go vet $SRC_PATHS_PATTERN
+          if [ "$(gofmt -s -l ./api ./collectors ./emitters ./operators ./stream ./testutil ./util | wc -l)" -gt 0 ]; then exit 1; fi
+
+      - name: Run tests
+        run: |
+          go test -v ./api ./collectors/ ./emitters ./operators/... ./stream ./testutil ./util
+
+      - name: Build
+        run: |
+          go build ./api ./collectors/ ./emitters ./operators/... ./stream ./testutil ./util
