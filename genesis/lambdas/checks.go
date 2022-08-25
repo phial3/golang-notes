@@ -1,6 +1,8 @@
 package lambdas
 
-import "github.com/phial3/genesis/constraints"
+import (
+	"github.com/phial3/genesis/constraints"
+)
 
 // EqualTo returns lambda that checks if an item is equal to the given value.
 func EqualTo[T comparable](a T) func(T) bool {
@@ -47,9 +49,9 @@ func IsNotEmpty[T any](items []T) bool {
 //
 // A few examples:
 //
-// 	 + 0 for int and float
-// 	 + "" for string
-// 	 + nil for slice
+//   - 0 for int and float
+//   - "" for string
+//   - nil for slice
 func IsDefault[T comparable](value T) bool {
 	var def T
 	return value == def
@@ -59,9 +61,9 @@ func IsDefault[T comparable](value T) bool {
 //
 // A few examples:
 //
-// 	 + 0 for int and float
-// 	 + "" for string
-// 	 + nil for slice
+//   - 0 for int and float
+//   - "" for string
+//   - nil for slice
 func IsNotDefault[T comparable](value T) bool {
 	var def T
 	return value != def
