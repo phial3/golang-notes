@@ -11,4 +11,7 @@ use (
 	./goutil
 	./genesis
 	./stream
+	./gostream
+	./kaka-streams
+	./pkg
 )
