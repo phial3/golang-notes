@@ -195,7 +195,7 @@ func (streamSelf *StreamDef[T]) Extend(streams ...*StreamDef[T]) *StreamDef[T] {
 
 // Reverse Reverse Stream items
 func (streamSelf *StreamDef[T]) Reverse() *StreamDef[T] {
-	result := StreamDef[T](Reverse(*streamSelf...))
+	result := (StreamDef[T])(Reverse(*streamSelf...))
 	return &result
 }
 

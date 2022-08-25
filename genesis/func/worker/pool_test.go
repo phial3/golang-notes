@@ -1,13 +1,12 @@
 package worker
 
 import (
+	fpgo "github.com/phial3/genesis/func"
 	"testing"
 	"time"
 	// "sync"
 
 	"github.com/stretchr/testify/assert"
-
-	fpgo "github.com/TeaEntityLab/fpGo/v2"
 )
 
 func TestWorkerPool(t *testing.T) {
