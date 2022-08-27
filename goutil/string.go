@@ -81,7 +81,8 @@ func CamelString(s string) string {
 
 // LintCamelString converts the accepted string to a camel string (xx_id to XxID)
 // NOTE:
-//  support common initialisms
+//
+//	support common initialisms
 func LintCamelString(name string) string {
 	// Fast path for simple cases: "_" and all lowercase.
 	if name == "_" {
@@ -208,7 +209,7 @@ func HTMLEntityToUTF8(str string, base int) string {
 	oldnew := make([]string, 0, len(a)*2)
 	for _, s := range a {
 		if i, err := strconv.ParseInt(s[1], base, 32); err == nil {
-			oldnew = append(oldnew, s[0], string(i))
+			oldnew = append(oldnew, s[0], strconv.FormatInt(i, 10))
 		}
 	}
 	r := strings.NewReplacer(oldnew...)
@@ -226,12 +227,12 @@ func CodePointToUTF8(str string, base int) string {
 	strSlice := strings.Split(str, `\u`)
 	last := len(strSlice) - 1
 	if len(strSlice[last]) > 4 {
-		strSlice = append(strSlice, string(strSlice[last][4:]))
-		strSlice[last] = string(strSlice[last][:4])
+		strSlice = append(strSlice, strSlice[last][4:])
+		strSlice[last] = strSlice[last][:4]
 	}
 	for ; i <= last; i++ {
 		if x, err := strconv.ParseInt(strSlice[i], base, 32); err == nil {
-			strSlice[i] = string(x)
+			strSlice[i] = strconv.FormatInt(x, 10)
 		}
 	}
 	return strings.Join(strSlice, "")
@@ -249,10 +250,10 @@ var spaceReplacer = strings.NewReplacer(
 	"\t ", "\t",
 	"\v\v", "\v",
 	"\f\f", "\f",
-	string(0x85)+string(0x85),
-	string(0x85),
-	string(0xA0)+string(0xA0),
-	string(0xA0),
+	string(rune(0x85))+string(rune(0x85)),
+	string(rune(0x85)),
+	string(rune(0xA0))+string(rune(0xA0)),
+	string(rune(0xA0)),
 )
 
 // SpaceInOne combines multiple consecutive space characters into one.
