@@ -1,6 +1,7 @@
 go 1.18
 
 use (
+	./100mistakes
 	./automi
 	./creek
 	./commonlib
@@ -16,4 +17,5 @@ use (
 	./gostream
 	./kaka-streams
 	./pkg
+	id-generator
 )
