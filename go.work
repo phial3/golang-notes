@@ -4,6 +4,7 @@ use (
 	./100mistakes
 	./automi
 	./creek
+	./container
 	./commonlib
 	./workpool
 	./mylib
@@ -13,7 +14,7 @@ use (
 	./accumulate
 	./goutil
 	./genesis
-	./generic
+	./generic-container
 	./stream
 	./gostream
 	./kaka-streams
