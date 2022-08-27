@@ -13,6 +13,7 @@ use (
 	./accumulate
 	./goutil
 	./genesis
+	./generic
 	./stream
 	./gostream
 	./kaka-streams
