@@ -10,8 +10,7 @@ func convertEmptySlice(foos []Foo) []Bar {
 }
 
 func convertGivenCapacity(foos []Foo) []Bar {
-	n := len(foos)
-	bars := make([]Bar, 0, n)
+	bars := make([]Bar, 0, len(foos))
 
 	for _, foo := range foos {
 		bars = append(bars, fooToBar(foo))
@@ -20,8 +19,7 @@ func convertGivenCapacity(foos []Foo) []Bar {
 }
 
 func convertGivenLength(foos []Foo) []Bar {
-	n := len(foos)
-	bars := make([]Bar, n)
+	bars := make([]Bar, len(foos))
 
 	for i, foo := range foos {
 		bars[i] = fooToBar(foo)

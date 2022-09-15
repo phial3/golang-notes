@@ -6,12 +6,12 @@ import (
 	"sync"
 )
 
-type Foo struct {
-	Bar
-}
-
 type Bar struct {
 	Baz int
+}
+
+type Foo struct {
+	Bar
 }
 
 func fooBar() {

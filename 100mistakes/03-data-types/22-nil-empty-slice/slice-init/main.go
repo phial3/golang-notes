@@ -19,5 +19,5 @@ func main() {
 }
 
 func log(i int, s []string) {
-	fmt.Printf("%d: empty=%t\tnil=%t\n", i, len(s) == 0, s == nil)
+	fmt.Printf("%d: cap=%d\tlen=%d\tnil=%t\n", i, cap(s), len(s), s == nil)
 }
