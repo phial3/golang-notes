@@ -11,21 +11,21 @@ import (
 	"github.com/mitchellh/mapstructure"
 )
 
-// ExcelOfficeAgent 定义Excel中的一行数据
+// ExcelOfficeInfo 定义Excel中的一行数据
 // 结构体TAG中 json,index 必须存在
 // json: 字段名称
 // index: 索引名称
 // name: 中文名称
-type ExcelOfficeAgent struct {
+type ExcelOfficeInfo struct {
 	OfficeCode              string `json:"officeCode" name:"OFFICE号" index:"0"`
-	OfficeName              string `json:"officeName" name:"代理人中文名称" index:"1"`
-	UnifiedSocialCreditCode string `json:"unifiedSocialCreditCode" name:"统一社会信用代码" index:"2"`
-	//IataCode                string `json:"iataCode" name:"IATA号" index:"1"`
-	//OfficeNameEN            string `json:"officeNameEN" name:"代理人英文名称" index:"3"`
-	//City                    string `json:"city" name:"所在城市" index:"4"`
-	//Country                 string `json:"country" name:"所在国家" index:"5"`
-	//PayName                 string `json:"payName" name:"需修改为的结算名称" index:"6"`
-	//Description             string `json:"description" name:"备注" index:"7"`
+	IataCode                string `json:"iataCode" name:"IATA号" index:"1"`
+	OfficeName              string `json:"officeName" name:"代理人中文名称" index:"2"`
+	OfficeNameEN            string `json:"officeNameEN" name:"代理人英文名称" index:"3"`
+	City                    string `json:"city" name:"所在城市" index:"4"`
+	Country                 string `json:"country" name:"所在国家" index:"5"`
+	PayName                 string `json:"payName" name:"需修改为的结算名称" index:"6"`
+	Description             string `json:"description" name:"备注" index:"7"`
+	UnifiedSocialCreditCode string `json:"unifiedSocialCreditCode" name:"统一社会信用代码" index:"8"`
 }
 
 type BranchOfficeRelationship struct {
@@ -36,23 +36,11 @@ type BranchOfficeRelationship struct {
 }
 
 const (
-	OfficeInfoExcelFileAbsolutePath   string = "../../../preferred-business/config/office_info_all.xlsx"
-	BranchOfficeExcelFileAbsolutePath string = "../../../preferred-business/config/branch_office_relationship.xlsx"
+	OfficeInfoExcelFileAbsolutePath string = "/tmp/5.billing_SLYX_AGENT_20220708.xlsx"
 )
 
 func TestPrintOfficeInfo(t *testing.T) {
 	rows, err := ReadExcel(OfficeInfoExcelFileAbsolutePath)
-	if err != nil {
-		t.Fatal("read excel error. err=", err.Error())
-	}
-
-	for _, row := range rows {
-		fmt.Println("row=", row)
-	}
-}
-
-func TestPrintBranchOfficeRelation(t *testing.T) {
-	rows, err := ReadExcel(BranchOfficeExcelFileAbsolutePath)
 	if err != nil {
 		t.Fatal("read excel error. err=", err.Error())
 	}
@@ -68,10 +56,10 @@ func TestParseStruct(t *testing.T) {
 		t.Fatal("read excel error. err=", err.Error())
 	}
 
-	var arr []ExcelOfficeAgent
-	err = NewExcelStructDefault().SetPointerStruct(&ExcelOfficeAgent{}).RowsAllProcess(rows,
+	var arr []ExcelOfficeInfo
+	err = NewExcelStructDefault().SetPointerStruct(&ExcelOfficeInfo{}).RowsAllProcess(rows,
 		func(maps map[string]interface{}) error {
-			var ptr ExcelOfficeAgent
+			var ptr ExcelOfficeInfo
 			// map 转 结构体
 			if err2 := mapstructure.Decode(maps, &ptr); err2 != nil {
 				return err2
@@ -86,12 +74,20 @@ func TestParseStruct(t *testing.T) {
 		os.Exit(1)
 	}
 
+	repeatMap := make(map[string]string, 0)
 	// 不满足条件的过滤掉
-	for _, v := range arr {
+	for idx, v := range arr {
 		if v.OfficeCode != "" && v.OfficeName != "" && commonregex.HasZhFullChar(v.OfficeName) {
-			fmt.Printf("%#v\n", v)
+			_, ok := repeatMap[v.OfficeCode]
+			if ok {
+				fmt.Printf("重复数据 %d: %#v\n", idx, v)
+			} else {
+				repeatMap[v.OfficeCode] = v.OfficeName
+			}
 		}
 	}
+	fmt.Printf("总共%d条\n", len(repeatMap))
+
 }
 
 func TestWriteExcel(t *testing.T) {
