@@ -155,5 +155,4 @@ func TestDumpWithSemicolon(t *testing.T) {
 		fmt.Println(buffer.String())
 		t.Fail()
 	}
-
 }
